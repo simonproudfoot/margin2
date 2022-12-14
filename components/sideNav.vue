@@ -2,6 +2,7 @@
 <nav class="absolute md:fixed h-full w-full md:w-3/12 md:relative md:h-auto z-40 ">
     <div class="navMenu fixed overflow-auto md:relative top-0 w-full bg-black  md:bg-transparent h-full flex md:block items-center md:items-start" v-show="showMenu">
         <div class="mx-auto">
+    
             <ul class="sticky top-0 px-12 pb-4 pt-14 md:pt-4 mt-1" :class="$store.state.nav.darkNav ? 'navWhite' : 'navBlack'">
                 <li v-for="page in $store.state.nav.mainNav" :key="page.id" :class="$store.state.nav.darkNav ? 'text-white' : 'text-white md:text-black'" class="block font-body w-full border-black my-2 text-2xl text-center md:text-left md:text-base w-fit mx-auto md:mx-0 hover:border-white border-b md:border-none transition-duration-300">
                     <nuxt-link v-if="page.type !== 'custom'" :to="page.slug">{{page.title}}</nuxt-link>
@@ -36,7 +37,9 @@ export default {
     },
     watch: {
         $route() {
-            this.$store.commit('nav/SET_MENU', false)
+            if (this.$store.state.nav.menuOpen) {
+                this.$store.commit('nav/SET_MENU', false)
+            }
         },
         '$store.state.nav.menuOpen'(val) {
             this.$nextTick(() => {
@@ -55,9 +58,11 @@ export default {
         }
     },
     mounted() {
+
         this.animatePageLinks()
     },
     created() {
+
         if (process.client) {
             this.changeWidth()
             window.addEventListener("resize", this.changeWidth);
@@ -72,7 +77,7 @@ export default {
             this.isMobile = window.innerWidth < 768 ? true : false
         },
         animatePageLinks() {
-            if (this.frontpage && !this.isMobile) {
+            if (this.$route.name == 'index' && !this.isMobile) {
                 this.$gsap.from('.logo', { y: -50, autoAlpha: 0, delay: 0.7 })
                 this.$gsap.from('nav li', { x: -50, autoAlpha: 0, stagger: 0.05, delay: 1 })
             }

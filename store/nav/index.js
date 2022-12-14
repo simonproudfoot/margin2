@@ -15,6 +15,9 @@ export const mutations = {
   SET_NAV: (state, nav) => {
     state.mainNav = nav;
   },
+  SET_FOOT: (state, nav) => {
+    state.footerNav = nav;
+  },
 };
 
 export const actions = {
@@ -25,6 +28,15 @@ export const actions = {
       commit('SET_NAV', nav.items);
     } catch (err) {
       console.error('getNav', err);
+    }
+  },
+  async getFooter({ state, commit }) {
+    if (state.footerNav.length) return;
+    try {
+      let nav = await this.$axios.$get('menus/v1/menus/footer-menu');
+      commit('SET_FOOT', nav.items);
+    } catch (err) {
+      console.error('getFoot', err);
     }
   },
 };
