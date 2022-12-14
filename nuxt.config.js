@@ -1,4 +1,4 @@
-const baseHref = process.env.BASE_URL_LIVE || '/';
+const baseHref = process.env.BASE_URL || '/';
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
