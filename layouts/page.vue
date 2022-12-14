@@ -2,7 +2,6 @@
 <div>
     <TopNav :frontpage="false" />
     <div class="min-h-screen md:flex ">
-        
         <sideNav />
         <Nuxt />
     </div>
@@ -12,6 +11,6 @@
 
 <script>
 export default {
-    name: 'default',
+    name: 'page',
 }
 </script>

@@ -2,7 +2,6 @@ const baseHref = process.env.BASE_URL || '/';
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'margin2',
@@ -49,7 +48,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
+    '@nuxt/image',
     '@nuxtjs/tailwindcss',
     'nuxt-gsap-module'
   ],
