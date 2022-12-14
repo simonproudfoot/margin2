@@ -4,7 +4,7 @@ export default {
   target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'margin2',
+    title: 'Margin',
     htmlAttrs: {
       lang: 'en'
     },
@@ -18,27 +18,28 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
-
   axios: {
     baseURL: baseHref + '/wp-json/', // Used as fallback if no runtime config is provided
-},
-
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
 
-    // postcss: {
-    //     plugins: {
-    //         'postcss-import': {},
-    //         'tailwindcss/nesting': {},
-    //         tailwindcss: {},
-    //         autoprefixer: {},
-    //       }
+  image: {
+    provider: 'netlify',
+  },
 
-    // },
-    
+  // postcss: {
+  //     plugins: {
+  //         'postcss-import': {},
+  //         'tailwindcss/nesting': {},
+  //         tailwindcss: {},
+  //         autoprefixer: {},
+  //       }
+
+  // },
+
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/data.server.js'],

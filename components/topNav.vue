@@ -14,18 +14,9 @@
 </div>
 </template>
 <script>
-// import { useNavStore } from '@/stores/index'
-// import { usePageData } from '@/stores/pageData'
+
 export default {
     props: ['frontpage'],
-    // setup() {
-    //     const navStore = useNavStore()
-    //     const pageStore = usePageData()
-    //     return {
-    //         pageStore,
-    //         navStore
-    //     }
-    // },
     
     computed: {
         logoColor() {
