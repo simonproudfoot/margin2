@@ -1,6 +1,6 @@
 <template>
 <nav class="absolute md:fixed h-full w-full md:w-3/12 md:relative md:h-auto z-40 ">
-    <div class="navMenu fixed overflow-auto md:relative top-0 w-full bg-black  md:bg-transparent h-full flex md:block items-center md:items-start" v-if="showMenu">
+    <div class="navMenu fixed overflow-auto md:relative top-0 w-full bg-black  md:bg-transparent h-full flex md:block items-center md:items-start" v-show="showMenu">
         <div class="mx-auto">
             <ul class="sticky top-0 px-12 pb-4 pt-14 md:pt-4 mt-1" :class="$store.state.nav.darkNav ? 'navWhite' : 'navBlack'">
                 <li v-for="page in $store.state.nav.mainNav" :key="page.id" :class="$store.state.nav.darkNav ? 'text-white' : 'text-white md:text-black'" class="block font-body w-full border-black my-2 text-2xl text-center md:text-left md:text-base w-fit mx-auto md:mx-0 hover:border-white border-b md:border-none transition-duration-300">
@@ -36,12 +36,12 @@ export default {
     },
     watch: {
         $route() {
-            this.$store.state.nav.menuOpen = false
+            this.$store.commit('nav/SET_MENU', false)
         },
         '$store.state.nav.menuOpen'(val) {
             this.$nextTick(() => {
                 const body = document.querySelector('body');
-                if (val) {
+                if (val == true) {
                     body.style.overflowY = 'hidden'
                     this.$gsap.from('.navMenu', { yPercent: 100 })
                     this.$gsap.to('.contentArea', { yPercent: -1 })
