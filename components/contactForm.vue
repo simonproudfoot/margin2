@@ -1,5 +1,5 @@
 <template>
-<section v-if="hasContactForm">
+<section>
     <form action="#" class="space-y-4 md:max-w-lg">
         <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
@@ -15,9 +15,10 @@
     </form>
 </section>
 </template>
+
 <script>
 export default {
-    props: ['hasContactForm'],
+
     data() {
         return {
             sending: false,
@@ -38,13 +39,21 @@ export default {
         },
         async checkForm(e) {
             this.sending = true
-            const config = useRuntimeConfig()
+
             e.preventDefault();
             this.errors = [];
             if (!this.email) {
                 this.errors.push("Email required.");
+                setTimeout(() => {
+                    this.errors = []
+                    this.sending = false
+                }, 2000);
             } else if (!this.validEmail(this.email)) {
                 this.errors.push("Valid email required.");
+                setTimeout(() => {
+                    this.errors = []
+                    this.sending = false
+                }, 2000);
             }
             if (!this.message) {
                 this.errors.push("Message required.");
@@ -54,11 +63,7 @@ export default {
                 bodyFormData.set("your-email", this.email);
                 bodyFormData.set("your-message", this.message);
 
-                await $fetch(`${config.apiBase}/wp-json/contact-form-7/v1/contact-forms/59/feedback`, {
-                        method: 'POST',
-                        body: bodyFormData,
-                        config: { headers: { "Content-Type": "multipart/form-data" } }
-                    }).then((response) => {
+                await this.$axios.post(`contact-form-7/v1/contact-forms/5/feedback`, bodyFormData).then((response) => {
                         console.log(response);
                         this.sent = true;
                         this.sending = false
@@ -79,8 +84,7 @@ export default {
     }
 };
 </script>
-    
-    
+
 <style>
     
     </style>

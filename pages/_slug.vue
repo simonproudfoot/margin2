@@ -3,6 +3,7 @@
     <h1 v-if="!$store.state.page.pageFeatures.featuredImage" ref="header" class="pb-12 text-4xl" v-html="title"></h1>
     <div class="page-content" v-html="content"></div>
     <ContactForm :hasContactForm="hasContactForm" />
+    
 </main>
 </template>
 
