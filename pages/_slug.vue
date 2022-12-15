@@ -3,14 +3,16 @@
     <h1 v-if="!$store.state.page.pageFeatures.featuredImage" ref="header" class="pb-12 text-4xl" v-html="title"></h1>
     <div class="page-content" v-html="content"></div>
     <ContactForm :hasContactForm="hasContactForm" />
-    
+
 </main>
 </template>
 
 <script>
 export default {
     layout: "page",
+
     async asyncData({ params, $axios, store }) {
+       
         const post = await $axios.get(
             `wp/v2/pages?slug=${params.slug}&_embed`
         );
@@ -36,7 +38,6 @@ export default {
         return pageData
     },
 
+    
 }
 </script>
-
-

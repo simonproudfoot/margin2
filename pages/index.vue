@@ -23,17 +23,23 @@
 <script>
 import getCookie from '@/functions/getCookie.js';
 export default {
-    layout: "empty",
+    layout: "frontpage",
     data: () => {
         return {
             imageLoaded: false,
             cookieGo: false
         }
     },
+    
     async asyncData({ store }) {
         store.commit('page/FORCE_DARK', true)
     },
     watch: {
+     
+        $route(){
+            this.$store.state.nav.menuOpen ?  this.$store.commit('nav/SET_MENU') : null
+        },
+    
         imageLoaded(val) {
             if (val && getCookie('ageCheck') == 'true') {
                 this.runAnimation()
