@@ -22,7 +22,7 @@ export default {
     layout: "empty",
 
     async asyncData({ store }) {
-        store.commit('nav/SET_DARK', true)
+        store.commit('page/FORCE_DARK', true)
     },
     mounted() {
         const isMobile = window.innerWidth < 768 ? true : false
