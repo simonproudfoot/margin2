@@ -30,8 +30,8 @@ export default {
         let featuredImage = ''
         featuredImage = post.data[0].featured_media ? post.data[0]['_embedded']['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''
         const dark = post.data[0].acf.dark_background ? true : false
-        const pageData = { post: post.data[0], title: title, content: post.data[0].content.rendered, excerpt: excerpt, slug: params.slug }
-        store.commit('page/SET_FEATURED', { title: title, featuredImage: featuredImage, darkMode: dark, hasContactForm: post.data[0].acf.page_has_contact_form })
+        const pageData = { post: post.data[0], title: title, content: post.data[0].content.rendered, excerpt: excerpt, slug: params.slug, hasContactForm: post.data[0].acf.page_has_contact_form }
+        store.commit('page/SET_FEATURED', { title: title, featuredImage: featuredImage, darkMode: dark })
         return pageData
     },
   

@@ -12,7 +12,6 @@
     </div>
 </nav>
 </template>
-
 <script>
 export default {
     props: ['frontpage'],
@@ -57,11 +56,9 @@ export default {
         }
     },
     mounted() {
-
         this.animatePageLinks()
     },
     created() {
-
         if (process.client) {
             this.changeWidth()
             window.addEventListener("resize", this.changeWidth);

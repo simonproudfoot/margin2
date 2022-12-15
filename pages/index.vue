@@ -1,8 +1,8 @@
 <template>
 <div class="relative bg-black h-screen">
     <AgeCheck v-on:cookieUpdated="cookieUpdated" />
-    <TopNav v-show="imageLoaded" :frontpage="true" />
-    <sideNav v-show="imageLoaded" :frontpage="true" />
+    <TopNav v-if="imageLoaded  && cookieGo" :frontpage="true" />
+    <sideNav v-if="imageLoaded && cookieGo" :frontpage="true" />
     <div v-show="imageLoaded" class="h-screen w-full overflow-hidden absolute top-0 bottom-0">
         <div class="flex h-screen w-full  bg-black justify-items-stretch ">
             <nuxt-img @load="imageLoaded = true" format="webp" src="/img/marginbanner.jpg" alt="banner image" class="backImage absolute top-0 left-0 w-full h-full object-cover opacity-0 contentArea" />
@@ -19,11 +19,13 @@
 </template>
 
 <script>
+import getCookie from '@/functions/getCookie.js';
 export default {
     layout: "empty",
     data: () => {
         return {
-            imageLoaded: false
+            imageLoaded: false,
+            cookieGo: false
         }
     },
     async asyncData({ store }) {
@@ -31,8 +33,9 @@ export default {
     },
     watch: {
         imageLoaded(val) {
-            if (val && this.getCookie('ageCheck') == 'true') {
+            if (val && getCookie('ageCheck') == 'true') {
                 this.runAnimation()
+                this.cookieGo = true
             }
         }
     },
@@ -49,15 +52,8 @@ export default {
         },
         cookieUpdated() {
             this.runAnimation()
+            this.cookieGo = true
         },
-        getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        },
-    },
-    mounted() {
-
     },
 }
 </script>
