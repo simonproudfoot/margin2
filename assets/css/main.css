@@ -12,11 +12,17 @@ html, body {
     @apply text-gray-900 font-body
 }
 
+video{
+ 
+}
+
+
 p, ol, ul, blockquote, pre, code {
     line-height: 18px;
     margin-bottom: 18px;
     line-height: 1.5em;
     margin-bottom: 1.5em;
+    
 }
 
 
@@ -120,7 +126,7 @@ p, ol, ul, blockquote, pre, code {
   
 
 
-  .page-content{}
+  
   
 /* 
 .page-enter-active {

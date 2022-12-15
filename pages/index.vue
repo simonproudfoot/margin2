@@ -11,7 +11,8 @@
             <div class="absolute flex right-0 top-1/3 z-10 font-body  text-center md:text-left w-full md:w-1/2 ">
                 <div class="mx-auto  w-fit block md:pl-12">
                     <h1 class="intro-text font-bold text-5xl text-white">The Perfect</h1>
-                    <h1 class="intro-text font-bold text-5xl text-white self-center m">Sipping Gin... </h1>
+                    <h1 class="intro-text font-bold text-5xl mb-6 text-white self-center m">Sipping Gin... </h1>
+                    <nuxt-link to="/shop" class="cta py-2 px-6 mt-12 border-white text-xl mx-2 block w-1/2 mx-auto bg-white md:hidden z-30">SHOP</nuxt-link>
                 </div>
             </div>
         </div>
@@ -56,7 +57,7 @@ export default {
             this.$gsap.to('.backImage', { autoAlpha: isMobile ? 0.3 : 1, duration: 2, scale: 1 }).then(() => {
                 body.style.overflow = 'auto'
             })
-            this.$gsap.from('.intro-text', { y: 50, autoAlpha: 0, delay: 1, stagger: 0.4, duration: 1 })
+            this.$gsap.from('.intro-text, .cta', { y: 50, autoAlpha: 0, delay: 1, stagger: 0.4, duration: 1 })
         },
         cookieUpdated() {
             this.runAnimation()

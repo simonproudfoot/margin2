@@ -11,7 +11,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-    
       fontFamily: {
         body: ["Source Serif Pro", ...defaultTheme.fontFamily.serif],
         header: ["Source Serif Pro", ...defaultTheme.fontFamily.serif],
