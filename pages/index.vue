@@ -1,13 +1,15 @@
 <template>
-<div class="relative bg-black h-screen">
+<div class="relative bg-black">
     <AgeCheck v-on:cookieUpdated="cookieUpdated" />
-    <TopNav v-if="imageLoaded  && cookieGo" :frontpage="true" />
-    <sideNav v-if="imageLoaded && cookieGo" :frontpage="true" />
-    <div v-show="imageLoaded" class="h-screen w-full overflow-hidden absolute top-0 bottom-0">
-        <div class="flex h-screen w-full  bg-black justify-items-stretch ">
-            <nuxt-img @load="imageLoaded = true" format="webp" src="/img/marginbanner.jpg" alt="banner image" class="backImage absolute top-0 left-0 w-full h-full object-cover opacity-0 contentArea" />
-            <div class="fixed right-0 top-1/3 z-10 font-body text-center md:text-left w-full md:w-1/2 ">
-                <div class="mx-auto w-fit md:pl-12">
+
+    <div v-show="imageLoaded" class="h-screen w-full overflow-hidden  relative top-0 bottom-0">
+
+        <div class=" h-screen w-full  bg-black justify-items-stretch  ">
+            <TopNav class="absolute top-0 bg-transparent" v-if="imageLoaded  && cookieGo" :frontpage="true" />
+            <sideNav class="absolute top-0 left" v-if="imageLoaded && cookieGo" :frontpage="true" />
+            <nuxt-img @load="imageLoaded = true" format="webp" src="/img/marginbanner.jpg" alt="banner image" class="backImage absolute top-0 left-0 w-full h-screen object-cover opacity-0 contentArea" />
+            <div class="absolute flex right-0 top-1/3 z-10 font-body  text-center md:text-left w-full md:w-1/2 ">
+                <div class="mx-auto  w-fit block md:pl-12">
                     <h1 class="intro-text font-bold text-5xl text-white">The Perfect</h1>
                     <h1 class="intro-text font-bold text-5xl text-white self-center m">Sipping Gin... </h1>
                 </div>

@@ -1,5 +1,5 @@
 <template>
-<main id="scrollTo" v-if="post" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage && 'pt-4 mt-1'" :style="($store.state.page.pageFeatures.featuredImage && 'margin-top:80vh')">
+<main id="scrollTo" v-if="post" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage && 'pt-4 mt-1'" :style="($store.state.page.pageFeatures.featuredImage && 'margin-top:85vh')">
     <h1 v-if="!$store.state.page.pageFeatures.featuredImage" ref="header" class="pb-12 text-4xl" v-html="title"></h1>
     <div class="page-content" v-html="content"></div>
     <ContactForm :hasContactForm="hasContactForm" />
@@ -11,7 +11,7 @@ export default {
     layout: "page",
     async asyncData({ params, $axios, store }) {
         const post = await $axios.get(
-            `wp/v2/pages?slug=${params.slug}&_embed`
+            `wp/v2/posts?slug=${params.slug}&_embed`
         );
         let title = post.data[0].title.rendered
             .replace(/–/g, '-')

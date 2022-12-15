@@ -3,9 +3,10 @@
     <div class="navMenu fixed overflow-auto md:relative top-0 w-full bg-black  md:bg-transparent h-full flex md:block items-center md:items-start" v-show="showMenu">
         <div class="mx-auto">
             <ul class="sticky top-0 px-12 pb-4 pt-14 md:pt-4 mt-1" :class="$store.state.page.pageFeatures.darkMode ? 'navWhite' : 'navBlack'">
-                <li v-for="page in $store.state.nav.mainNav" :key="page.id" :class="$store.state.page.pageFeatures.darkMode ? 'text-white' : 'text-white md:text-black'" class="block font-body w-full border-black my-2 text-2xl text-center md:text-left md:text-base w-fit mx-auto md:mx-0 hover:border-white border-b md:border-none transition-duration-300">
-                    <nuxt-link v-if="page.type !== 'custom'" :to="page.slug">{{page.title}}</nuxt-link>
-                    <nuxt-link class="tet-" v-else :to="page.url" target="_blank">{{page.title}}</nuxt-link>
+                <li v-for="page in $store.state.nav.mainNav" :key="'/'+page.id" :class="$store.state.page.pageFeatures.darkMode ? 'text-white' : 'text-white md:text-black'" class="block font-body w-full border-black my-2 text-2xl text-center md:text-left md:text-base w-fit mx-auto md:mx-0 hover:border-white border-b md:border-none transition-duration-300">
+                    <nuxt-link v-if="page.type !== 'custom' && page.type_label=='Page'" :to="'/'+page.slug" v-html="page.title"></nuxt-link>
+                    <nuxt-link class="font-bold" v-else-if="page.type !== 'custom' && page.type_label=='Post'" :to="'/blog/'+page.slug" v-html="page.title"></nuxt-link>
+                    <nuxt-link class="tet-" v-else :to="page.url" target="_blank" v-html="page.title"></nuxt-link>
                 </li>
             </ul>
         </div>
@@ -34,11 +35,6 @@ export default {
         }
     },
     watch: {
-        $route() {
-            if (this.$store.state.nav.menuOpen) {
-                this.$store.commit('nav/SET_MENU', false)
-            }
-        },
         '$store.state.nav.menuOpen'(val) {
             this.$nextTick(() => {
                 const body = document.querySelector('body');
