@@ -5,9 +5,8 @@ export const state = () => ({
     title: '',
     featuredImage: '',
     darkMode: false,
-    hasContactForm: false
+    hasContactForm: false,
   },
-
 })
 
 export const getters = {

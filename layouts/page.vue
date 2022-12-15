@@ -1,10 +1,11 @@
 <template>
 <div>
+    <AgeCheck/>
     <TopNav :frontpage="false" />
     <div class="min-h-screen md:flex ">
         <sideNav />
         <div v-if="$store.state.page.pageFeatures.featuredImage" class="bg-black absolute top-0 left-0 h-screen w-full flex">
-            <nuxt-img :src="$store.state.page.pageFeatures.featuredImage" placeholder alt="" class="backImage w-full h-full object-cover opacity-80" />
+            <nuxt-img format="webp" :src="$store.state.page.pageFeatures.featuredImage" placeholder alt="" class="backImage w-full h-full object-cover opacity-80" />
         </div>
         <div v-if="$store.state.page.pageFeatures.featuredImage" class="absolute top-0 left-0 h-screen w-full flex justify-items-end ">
             <div class="flex items-end w-full">
