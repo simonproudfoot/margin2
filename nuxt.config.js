@@ -40,6 +40,17 @@ export default {
 
   // },
 
+  css: ['~/assets/css/main.css'],
+  postcss: {
+      plugins: {
+          'postcss-import': {},
+          'tailwindcss/nesting': {},
+          tailwindcss: {},
+          autoprefixer: {},
+        }
+
+  },
+
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/data.server.js'],
