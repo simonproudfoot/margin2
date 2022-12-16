@@ -52,10 +52,10 @@ export default {
         runAnimation() {
             const isMobile = window.innerWidth < 768 ? true : false
             let body = document.querySelector('body');
-            body.style.overflow = 'hidden'
+
             this.$gsap.set('.backImage', { scale: 1.2 })
             this.$gsap.to('.backImage', { autoAlpha: isMobile ? 0.3 : 1, duration: 2, scale: 1 }).then(() => {
-                body.style.overflow = 'auto'
+             
             })
             this.$gsap.from('.intro-text, .cta', { y: 50, autoAlpha: 0, delay: 1, stagger: 0.4, duration: 1 })
         },
