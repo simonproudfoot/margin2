@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import getCookie from '@/functions/getCookie.js';
+import getCookie from '@/plugins/getCookie.js';
 export default {
     layout: "frontpage",
     data: () => {

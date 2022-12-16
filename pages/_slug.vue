@@ -1,12 +1,10 @@
 <template>
-
-<main id="scrollTo" v-if="post" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage && 'pt-4 mt-1'" :style="($store.state.page.pageFeatures.featuredImage && 'margin-top:80vh')">
+<main id="scrollTo" v-if="post" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage ? 'pt-4 mt-1' : 'contentMargin'">
     <h1 v-if="!$store.state.page.pageFeatures.featuredImage" ref="header" class="pb-12 text-4xl" v-html="title"></h1>
     <div class="page-content" v-html="content"></div>
     <ContactForm v-if="hasContactForm" />
 </main>
 </template>
-
 <script>
 export default {
     layout: "page",
@@ -40,3 +38,21 @@ export default {
     },
 }
 </script>
+
+
+<style>
+
+  .contentMargin {
+    margin-top: 100vh;
+  }
+
+
+@media (min-width: 768px) {
+  .contentMargin {
+    margin-top: 80vh;
+  }
+}
+
+
+
+</style>

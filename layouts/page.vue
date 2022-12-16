@@ -2,20 +2,23 @@
 <div>
     <AgeCheck />
     <TopNav :frontpage="false" />
-    <div class="min-h-screen md:flex ">
+    <div class="min-h-screen md:flex">
         <sideNav />
 
-        <div v-if="$store.state.page.pageFeatures.featured_video" class="bg-black absolute top-0 left-0 h-screen w-full flex">
-            <video controls muted autoplay loop class="backImage w-full h-full object-cover o">
+        <div v-if="$store.state.page.pageFeatures.featuredImage" class="absolute top-0 left-0 h-screen w-full">
+            <img :src="$store.state.page.pageFeatures.featuredImage" alt="" class="backImage w-full h-full object-cover opacity-80" />
+        </div>
+
+
+        <div v-if="$store.state.page.pageFeatures.featured_video" class="bg-black md:absolute top-0 left-0 h-screen w-full flex">
+            <video controls muted autoplay loop class="backImage w-full h-full object-cover ">
                 <source :src="$store.state.page.pageFeatures.featured_video" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
 
-        <div v-if="$store.state.page.pageFeatures.featuredImage" class="bg-black absolute top-0 left-0 h-screen w-full flex">
-            <img :src="$store.state.page.pageFeatures.featuredImage" alt="" class="backImage w-full h-full object-cover opacity-80" />
-        </div>
-        <div v-if="$store.state.page.pageFeatures.featuredImage" class="absolute top-0 left-0 h-screen w-full flex justify-items-end ">
+
+        <div v-if="$store.state.page.pageFeatures.featuredImage" class="absolute top-0 left-0 h-screen w-full flex justify-items-end">
             <div class="flex items-end w-full">
                 <div class="md:w-9/12 w-full md:push-1/4 py-12 px-12 justify-between z-10 bg-white font-bold max-w-[800px] h-fit bottom-0 right-0 flex">
                     <h1 ref="header" class="pb- text-4xl" v-html="$store.state.page.pageFeatures.title"></h1>
@@ -25,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <Nuxt  v-if="!$store.state.page.pageFeatures.featured_video"/>
+        <Nuxt v-if="!$store.state.page.pageFeatures.featured_video" />
     </div>
     <footerNav />
 </div>
