@@ -27,13 +27,13 @@ export default {
         showMenu() {
             //const body = document.querySelector('body');
             if (this.isMobile && this.$store.state.nav.menuOpen) {
-              //  body.style.overflowY = 'hidden'
+                //  body.style.overflowY = 'hidden'
                 return true
             }
             if (!this.isMobile) {
                 return true
             } else {
-               // body.style.overflowY = 'hidden'
+                // body.style.overflowY = 'hidden'
                 return false
             }
         }
@@ -43,16 +43,16 @@ export default {
             this.$nextTick(() => {
                 const body = document.querySelector('body');
                 if (val) {
-                    console.log('true')
+                    // console.log('true')
                     body.classList.toggle("overflow-hidden");
                     this.$gsap.from('.navMenu', { yPercent: 100 })
-                    this.$gsap.to('.contentArea', { yPercent: -1 })
+                    //this.$gsap.to('.contentArea', { yPercent: -1 })
                     this.$gsap.from('nav li', { y: 90, autoAlpha: 0, stagger: 0.05, delay: 0.2 })
                 } else {
-                    console.log('false')
+                    //console.log('false')
                     body.classList.toggle("overflow-hidden");
                     this.$gsap.to('.logo', { y: 0 })
-                    this.$gsap.set('.contentArea', { yPercent: 0 })
+                    //this.$gsap.set('.contentArea', { yPercent: 0 })
                 }
             });
         }

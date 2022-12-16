@@ -4,6 +4,14 @@
     <TopNav :frontpage="false" />
     <div class="min-h-screen md:flex ">
         <sideNav />
+
+        <div v-if="$store.state.page.pageFeatures.featured_video" class="bg-black absolute top-0 left-0 h-screen w-full flex">
+            <video controls muted autoplay loop class="backImage w-full h-full object-cover o">
+                <source :src="$store.state.page.pageFeatures.featured_video" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
         <div v-if="$store.state.page.pageFeatures.featuredImage" class="bg-black absolute top-0 left-0 h-screen w-full flex">
             <img :src="$store.state.page.pageFeatures.featuredImage" alt="" class="backImage w-full h-full object-cover opacity-80" />
         </div>
@@ -17,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <Nuxt />
+        <Nuxt  v-if="!$store.state.page.pageFeatures.featured_video"/>
     </div>
     <footerNav />
 </div>
@@ -26,15 +34,15 @@
 <script>
 export default {
     name: 'page',
-    beforeDestroy(){
-        this.$store.state.nav.menuOpen ?  this.$store.commit('nav/SET_MENU') : null
+    beforeDestroy() {
+        this.$store.state.nav.menuOpen ? this.$store.commit('nav/SET_MENU') : null
     },
     watch: {
-        $route(){
-            this.$store.state.nav.menuOpen ?  this.$store.commit('nav/SET_MENU') : null
+        $route() {
+            this.$store.state.nav.menuOpen ? this.$store.commit('nav/SET_MENU') : null
         }
     },
-   
+
     methods: {
         scrollToContent() {
             const selected = document.getElementById('scrollTo')

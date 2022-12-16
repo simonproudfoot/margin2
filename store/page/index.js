@@ -1,18 +1,13 @@
 export const strict = false
-
 export const state = () => ({
-  pageFeatures: {  
+  pageFeatures: {
     title: '',
     featuredImage: '',
     darkMode: false,
     hasContactForm: false,
+    featured_video: ''
   },
 })
-
-export const getters = {
-
-}
-
 export const mutations = {
   FORCE_DARK: (state) => {
     state.pageFeatures.darkMode = true
@@ -20,9 +15,5 @@ export const mutations = {
   SET_FEATURED: (state, data) => {
     state.pageFeatures = data;
   },
-
-};
-
-export const actions = {
 
 };

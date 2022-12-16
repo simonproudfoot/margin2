@@ -1,9 +1,7 @@
 <template>
 <div class="relative bg-black">
     <AgeCheck v-on:cookieUpdated="cookieUpdated" />
-
     <div v-show="imageLoaded" class="h-screen w-full overflow-hidden  relative top-0 bottom-0">
-
         <div class=" h-screen w-full  bg-black justify-items-stretch  ">
             <TopNav class="absolute top-0 bg-transparent" v-if="imageLoaded  && cookieGo" :frontpage="true" />
             <sideNav class="absolute top-0 left" v-if="imageLoaded && cookieGo" :frontpage="true" />
