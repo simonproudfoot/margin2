@@ -1,0 +1,47 @@
+
+Woocommerce endpoints
+
+Get availaable payment gateways: /wp-json/wc/v2/payment_gateways
+
+List products: /wp-json/wc/v2/products
+
+Try this: 
+
+
+1. select product 
+2. list the payment gateway options 
+3. DEAL WITH WHATEVER THEY SELECT AND TAKE THE PAYMENT HERE ON THE NETLIFY SITE
+4. SEND THE FOLLOWING MAKING SURE TO SET SET_PAID TO TRUE 
+
+
+
+async function makePurchase(billing, shipping, products) {
+  try {
+    // Set up the API client
+    const api = axios.create({
+      baseURL: 'https://your-store-url.com/wp-json/wc/v3/',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic YOUR_API_KEY'
+      }
+    });
+
+    // Set up the order data
+    const data = {
+      payment_method: 'YOUR_PAYMENT_METHOD',
+      payment_method_title: 'YOUR_PAYMENT_METHOD_TITLE',
+      set_paid: true,
+      billing,
+      shipping,
+      line_items: products
+    };
+
+    // Send the POST request to the "orders" endpoint
+    const response = await api.post('orders', data);
+
+    // Return the order details
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

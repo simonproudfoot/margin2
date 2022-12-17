@@ -5,6 +5,7 @@
     <ContactForm v-if="hasContactForm" />
 </main>
 </template>
+
 <script>
 export default {
     layout: "page",
@@ -26,33 +27,26 @@ export default {
             return str.replace(/(<([^>]+)>)/ig, '').replace(/\r?\n|\r/ig, '');
         }
         let excerpt = removeTags(post.data[0].excerpt.rendered);
-      
-        let feauredVideo =  post.data[0].acf.header_video ? post.data[0].acf.header_video : '' 
+
+        let feauredVideo = post.data[0].acf.header_video ? post.data[0].acf.header_video : ''
         let featuredImage = post.data[0].featured_media ? post.data[0]['_embedded']['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''
-       
 
         const dark = post.data[0].acf.dark_background ? true : false
-        const pageData = { post: post.data[0], title: title, content: post.data[0].content.rendered, excerpt: excerpt, slug: params.slug, hasContactForm: post.data[0].acf.page_has_contact_form  }
-        store.commit('page/SET_FEATURED', { title: title, featuredImage: featuredImage, darkMode: dark,  featured_video: feauredVideo })
+        const pageData = { post: post.data[0], title: title, content: post.data[0].content.rendered, excerpt: excerpt, slug: params.slug, hasContactForm: post.data[0].acf.page_has_contact_form }
+        store.commit('page/SET_FEATURED', { title: title, featuredImage: featuredImage, darkMode: dark, featured_video: feauredVideo })
         return pageData
     },
 }
 </script>
 
-
 <style>
-
-  .contentMargin {
+.contentMargin {
     margin-top: 100vh;
-  }
-
-
-@media (min-width: 768px) {
-  .contentMargin {
-    margin-top: 80vh;
-  }
 }
 
-
-
+@media (min-width: 768px) {
+    .contentMargin {
+        margin-top: 80vh;
+    }
+}
 </style>
