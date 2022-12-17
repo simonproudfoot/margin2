@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="w-full md:w-2/3 p-4">
-            <h2 class="text-4xl font-bold mb-2" v-html="item.name"></h2>{{quantity}}
+            <h2 class="text-4xl font-bold mb-2" v-html="item.name"></h2>
             <p class="text-xl mb-0 font-bold" v-if="!item.on_sale">£{{item.price}}</p>
             <p v-else class="text-red mb-0">SALE £{{item.sale_price}}</p>
             <p>Shipping included</p>
@@ -54,12 +54,41 @@ export default {
             }
         }
     },
-    async asyncData({ $axios }) {
+
+    async asyncData({ params, $axios, store }) {
         try {
             const response = await $axios.get('https://remarkable-arithmetic-20e4c5.netlify.app/.netlify/functions/wooProducts');
             const products = response.data
+
+            const post = await $axios.get(
+                `wp/v2/pages?slug=shop&_embed`
+            );
+
+            let title = post.data[0].title.rendered
+                .replace(/–/g, '-')
+                .replace(/“/g, '"')
+                .replace(/”/g, '"')
+                .replace(/’/g, "'");
+
+            function removeTags(str) {
+                if ((str === null) || (str === ''))
+                    return false;
+                else
+                    str = str.toString();
+                return str.replace(/(<([^>]+)>)/ig, '').replace(/\r?\n|\r/ig, '');
+            }
+            let excerpt = removeTags(post.data[0].excerpt.rendered);
+
+            let feauredVideo = post.data[0].acf.header_video ? post.data[0].acf.header_video : ''
+            let featuredImage = post.data[0].featured_media ? post.data[0]['_embedded']['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''
+
+            const dark = post.data[0].acf.dark_background ? true : false
+            const pageData = { post: post.data[0], title: title, content: post.data[0].content.rendered, excerpt: excerpt, slug: params.slug, hasContactForm: post.data[0].acf.page_has_contact_form }
+            store.commit('page/SET_FEATURED', { title: title, featuredImage: featuredImage, darkMode: dark, featured_video: feauredVideo })
+
             return {
-                products
+                products,
+                pageData
             };
         } catch (error) {
             console.log(error)
