@@ -29,7 +29,6 @@ export default {
         this.visible = getCookie("ageCheck") == 'true' ? false : true
     },
     methods: {
-      
         age(val) {
             if (val) {
                 document.cookie = "ageCheck=true";

@@ -6,14 +6,13 @@
                 <li v-for="page in $store.state.nav.mainNav" :key="page.id" :class="$store.state.page.pageFeatures.darkMode ? 'text-white' : 'text-white md:text-black'" class="block font-body w-full border-black my-2 text-2xl text-center md:text-left md:text-base w-fit mx-auto md:mx-0 hover:border-white border-b md:border-none transition-duration-300">
                     <nuxt-link v-if="page.type !== 'custom' && page.type_label=='Page'" :to="'/'+page.slug" v-html="page.title"></nuxt-link>
                     <nuxt-link class="" v-else-if="page.type !== 'custom' && page.type_label=='Post'" :to="'/blog/'+page.slug" v-html="page.title"></nuxt-link>
-                    <nuxt-link class="" v-else :to="page.url" target="_blank" v-html="page.title"></nuxt-link>
+                    <a class="" v-else :href="page.url" target="_blank" v-html="page.title"></a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 </template>
-
 <script>
 export default {
     props: ['frontpage'],
@@ -25,15 +24,12 @@ export default {
     },
     computed: {
         showMenu() {
-            //const body = document.querySelector('body');
             if (this.isMobile && this.$store.state.nav.menuOpen) {
-                //  body.style.overflowY = 'hidden'
                 return true
             }
             if (!this.isMobile) {
                 return true
             } else {
-                // body.style.overflowY = 'hidden'
                 return false
             }
         }
@@ -43,16 +39,12 @@ export default {
             this.$nextTick(() => {
                 const body = document.querySelector('body');
                 if (val) {
-                    // console.log('true')
                     body.classList.toggle("overflow-hidden");
                     this.$gsap.from('.navMenu', { yPercent: 100 })
-                    //this.$gsap.to('.contentArea', { yPercent: -1 })
                     this.$gsap.from('nav li', { y: 90, autoAlpha: 0, stagger: 0.05, delay: 0.2 })
                 } else {
-                    //console.log('false')
                     body.classList.toggle("overflow-hidden");
-                    this.$gsap.to('.logo', { y: 0 })
-                    //this.$gsap.set('.contentArea', { yPercent: 0 })
+                    this.$gsap.to('.logo', { y: 0 })    
                 }
             });
         }
@@ -72,6 +64,7 @@ export default {
     },
     methods: {
         changeWidth() {
+            if (process.client)
             this.isMobile = window.innerWidth < 768 ? true : false
         },
         animatePageLinks() {

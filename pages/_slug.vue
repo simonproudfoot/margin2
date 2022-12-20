@@ -9,7 +9,21 @@
 <script>
 export default {
     layout: "page",
+    head() {
+        return {
+            title: this.$store.state.page.pageFeatures.title,
+            meta: [{
+                hid: 'description',
+                name: 'description',
+                content: 'Home page description'
+            }]
+        }
+    },
+    mounted(){
+     
+    },
     async asyncData({ params, $axios, store }) {
+        store.commit('nav/CLOSE_MENU')
         const post = await $axios.get(
             `wp/v2/pages?slug=${params.slug}&_embed`
         );

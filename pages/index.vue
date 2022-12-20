@@ -29,16 +29,16 @@ export default {
             cookieGo: false
         }
     },
-    
+
     async asyncData({ store }) {
         store.commit('page/FORCE_DARK', true)
     },
     watch: {
-     
-        $route(){
-            this.$store.state.nav.menuOpen ?  this.$store.commit('nav/SET_MENU') : null
+
+        $route() {
+            this.$store.state.nav.menuOpen ? this.$store.commit('nav/SET_MENU') : null
         },
-    
+
         imageLoaded(val) {
             if (val && getCookie('ageCheck') == 'true') {
                 this.runAnimation()
@@ -48,14 +48,16 @@ export default {
     },
     methods: {
         runAnimation() {
-            const isMobile = window.innerWidth < 768 ? true : false
-            let body = document.querySelector('body');
+            if (process.client) {
+                const isMobile = window.innerWidth < 768 ? true : false
+                let body = document.querySelector('body');
 
-            this.$gsap.set('.backImage', { scale: 1.2 })
-            this.$gsap.to('.backImage', { autoAlpha: isMobile ? 0.3 : 1, duration: 2, scale: 1 }).then(() => {
-             
-            })
-            this.$gsap.from('.intro-text, .cta', { y: 50, autoAlpha: 0, delay: 1, stagger: 0.4, duration: 1 })
+                this.$gsap.set('.backImage', { scale: 1.2 })
+                this.$gsap.to('.backImage', { autoAlpha: isMobile ? 0.3 : 1, duration: 2, scale: 1 }).then(() => {
+
+                })
+                this.$gsap.from('.intro-text, .cta', { y: 50, autoAlpha: 0, delay: 1, stagger: 0.4, duration: 1 })
+            }
         },
         cookieUpdated() {
             this.runAnimation()

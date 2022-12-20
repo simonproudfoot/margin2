@@ -16,6 +16,7 @@ export default {
     layout: "page",
     name: 'PostList',
     async asyncData({ $axios }) {
+        store.commit('nav/CLOSE_MENU')
         const { data } = await $axios.get('wp/v2/posts');
         return { posts: data };
     }

@@ -1,12 +1,15 @@
 export const strict = false
 export const state = () => ({
-    mainNav: [],
-    footerNav: [],
-    darkNav: false,
-    menuOpen: false
+  mainNav: [],
+  footerNav: [],
+  darkNav: false,
+  menuOpen: false
 })
 export const mutations = {
-  SET_MENU: (state) =>{
+  CLOSE_MENU: (state) => {
+    state.menuOpen = false
+  },
+  SET_MENU: (state) => {
     state.menuOpen = !state.menuOpen
   },
   SET_DARK: (state, val) => {

@@ -3,11 +3,20 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
+
+  env: {
+    WOO_USER: process.env.WOO_USER,
+    STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
+    STRIPE_ACCOUNT: process.env.STRIPE_ACCOUNT
+  },
   head: {
     title: 'Margin',
     htmlAttrs: {
       lang: 'en'
     },
+    script: [
+      { src: 'https://js.stripe.com/v3' },
+    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -21,56 +30,38 @@ export default {
   axios: {
     baseURL: baseHref + '/wp-json/', // Used as fallback if no runtime config is provided
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
-
   image: {
     provider: 'netlify',
   },
-
-  // postcss: {
-  //     plugins: {
-  //         'postcss-import': {},
-  //         'tailwindcss/nesting': {},
-  //         tailwindcss: {},
-  //         autoprefixer: {},
-  //       }
-
-  // },
-
   css: ['~/assets/css/main.css'],
   postcss: {
-      plugins: {
-          'postcss-import': {},
-          'tailwindcss/nesting': {},
-          tailwindcss: {},
-          autoprefixer: {},
-        }
-
+    plugins: {
+      'postcss-import': {},
+      'tailwindcss/nesting': {},
+      tailwindcss: {},
+      autoprefixer: {},
+    }
   },
-
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/data.server.js'],
-
+  plugins: [
+    '~/plugins/data.server.js',
+    { src: '~/plugins/stripe.js', mode: 'client' }
+  ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     'nuxt-gsap-module'
   ],
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios'
   ],
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  transpile: [
+    '/plugins',
+  ],
+ 
 }
