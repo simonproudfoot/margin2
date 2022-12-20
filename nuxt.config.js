@@ -4,11 +4,6 @@ export default {
   target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
 
-  env: {
-    WOO_USER: process.env.WOO_USER,
-    STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
-    STRIPE_ACCOUNT: process.env.STRIPE_ACCOUNT
-  },
   head: {
     title: 'Margin',
     htmlAttrs: {
@@ -60,8 +55,6 @@ export default {
     '@nuxtjs/axios'
   ],
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  transpile: [
-    '/plugins',
-  ],
+
  
 }
