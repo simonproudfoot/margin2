@@ -60,11 +60,11 @@ export default {
 
         try {
             const response = await $axios.get('https://remarkable-arithmetic-20e4c5.netlify.app/.netlify/functions/wooProducts');
-            const products = response.data
-            const pageData = getPageData({ params, $axios, store, url: "wp/v2/pages?slug=shop&_embed" })
+            const products = await response.data
+         //   const pageData = await getPageData({ params, $axios, store, url: "wp/v2/pages?slug=shop&_embed" })
             return {
                 products,
-                pageData
+               // pageData
             };
         } catch (error) {
             console.log(error)

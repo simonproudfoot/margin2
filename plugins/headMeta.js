@@ -26,7 +26,7 @@ export default function headMeta(yoast) {
       // SKIP FOR NOW
     } else {
       metaArray.push({
-        [ele[0]]: ele[1].replace(/[^\w\s]/gi, '')
+        name: ele[0], content: ele[1]
       });
     }
   })
