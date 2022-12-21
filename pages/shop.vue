@@ -1,7 +1,6 @@
 <template>
-<main id="scrollTo" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage!=null && 'pt-4 mt-1'" :style="($store.state.page.pageFeatures.featuredImage!=null && 'margin-top:85vh')">
+<main id="scrollTo" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px] pt-4 mt-1">
     <div v-for="item in products" :key="item.id" class="flex flex-col md:flex-row justify-between items-center">
-
         <div class="w-full md:w-2/3 p-4 order-2 md:order-1">
             <h2 class="text-4xl font-bold mb-2" v-html="item.name"></h2>
             <p class="text-xl mb-0 font-bold" v-if="!item.on_sale">£{{item.price}}</p>
@@ -18,7 +17,6 @@
                 <button v-else class="bg-black hover: text-white font-bold py-2 px-4">CURRENTLY NOT IN STOCK</button>
             </div>
         </div>
-
         <div class="order-1 md:order-2">
             <div>
                 <img v-for="(img, i) in item.images" :key="img.id" class="w-full h-full object-cover" :src="img.src" :class="showImg == i  ?'block' : 'hidden'" :alt="img.alt">
@@ -32,9 +30,9 @@
 </template>
 
 <script>
-import getPageData from '@/plugins/getPageData.js';
+
 export default {
-    layout: 'page',
+    layout: 'simple',
     data() {
         return {
             products: [],
@@ -61,10 +59,9 @@ export default {
         try {
             const response = await $axios.get('https://remarkable-arithmetic-20e4c5.netlify.app/.netlify/functions/wooProducts');
             const products = await response.data
-         //   const pageData = await getPageData({ params, $axios, store, url: "wp/v2/pages?slug=shop&_embed" })
             return {
                 products,
-               // pageData
+                // pageData
             };
         } catch (error) {
             console.log(error)
