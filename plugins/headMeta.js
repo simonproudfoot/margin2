@@ -26,7 +26,7 @@ export default function headMeta(yoast) {
       // SKIP FOR NOW
     } else {
       metaArray.push({
-        name: ele[0], content: ele[1]
+        hid: ele[0], name: ele[0], content: ele[1]
       });
     }
   })
