@@ -43,7 +43,6 @@ export default {
   components: true,
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxt/image',
     '@nuxtjs/tailwindcss',
     'nuxt-gsap-module'
   ],
