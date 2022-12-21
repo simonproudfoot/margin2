@@ -1,5 +1,5 @@
 <template>
-<div class="md:w-9/12 px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage && 'pt-4 mt-1'" :style="($store.state.page.pageFeatures.featuredImage && 'margin-top:80vh')">
+<div class="md:w-9/12 px-12 pb-24 contentArea z-10 bg-white max-w-[800px] pt-4 mt-1">
     <h1 class="text-3xl font-bold mb-4">Recent Posts</h1>
     <ul>
         <li v-for="post in posts" :key="post.id">
@@ -13,9 +13,9 @@
 </template>
 <script>
 export default {
-    layout: "page",
+    layout: "simple",
     name: 'PostList',
-    async asyncData({ $axios }) {
+    async asyncData({ $axios, store }) {
         store.commit('nav/CLOSE_MENU')
         const { data } = await $axios.get('wp/v2/posts');
         return { posts: data };
