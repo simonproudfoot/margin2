@@ -21,7 +21,6 @@
     "woocommerce-api": "^1.5.0"
   },
   "devDependencies": {
-    "@nuxt/image": "^0.7.1",
     "@nuxtjs/tailwindcss": "^4.2.1",
     "netlify-cli": "^12.2.11",
     "nuxt-gsap-module": "^1.7.2",

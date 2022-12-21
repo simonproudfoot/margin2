@@ -25,9 +25,6 @@ export default {
   axios: {
     baseURL: baseHref + '/wp-json/', // Used as fallback if no runtime config is provided
   },
-  image: {
-    provider: 'netlify',
-  },
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
