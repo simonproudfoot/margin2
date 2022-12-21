@@ -5,7 +5,8 @@ export const state = () => ({
     featuredImage: '',
     darkMode: false,
     hasContactForm: false,
-    featured_video: ''
+    featured_video: '',
+    yoast_head_json: []
   },
 })
 export const mutations = {
@@ -15,5 +16,4 @@ export const mutations = {
   SET_FEATURED: (state, data) => {
     state.pageFeatures = data;
   },
-
 };
