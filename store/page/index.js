@@ -2,7 +2,11 @@ export const strict = false
 export const state = () => ({
   pageFeatures: {
     title: '',
-    featuredImage: '',
+    featuredImage: {
+      src: '',
+      sizes: [],
+      alt: ''
+    },
     darkMode: false,
     hasContactForm: false,
     featured_video: '',

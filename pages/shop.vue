@@ -1,7 +1,7 @@
 <template>
-<main id="scrollTo"  class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage && 'pt-4 mt-1'" :style="($store.state.page.pageFeatures.featuredImage && 'margin-top:85vh')">
+<main id="scrollTo" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="!$store.state.page.pageFeatures.featuredImage!=null && 'pt-4 mt-1'" :style="($store.state.page.pageFeatures.featuredImage!=null && 'margin-top:85vh')">
     <div v-for="item in products" :key="item.id" class="flex flex-col md:flex-row justify-between items-center">
-       
+
         <div class="w-full md:w-2/3 p-4 order-2 md:order-1">
             <h2 class="text-4xl font-bold mb-2" v-html="item.name"></h2>
             <p class="text-xl mb-0 font-bold" v-if="!item.on_sale">£{{item.price}}</p>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import getPageData from '@/plugins/getPageData.js';
 export default {
     layout: 'page',
     data() {
@@ -56,36 +57,11 @@ export default {
     },
 
     async asyncData({ params, $axios, store }) {
+
         try {
             const response = await $axios.get('https://remarkable-arithmetic-20e4c5.netlify.app/.netlify/functions/wooProducts');
             const products = response.data
-
-            const post = await $axios.get(
-                `wp/v2/pages?slug=shop&_embed`
-            );
-
-            let title = post.data[0].title.rendered
-                .replace(/–/g, '-')
-                .replace(/“/g, '"')
-                .replace(/”/g, '"')
-                .replace(/’/g, "'");
-
-            function removeTags(str) {
-                if ((str === null) || (str === ''))
-                    return false;
-                else
-                    str = str.toString();
-                return str.replace(/(<([^>]+)>)/ig, '').replace(/\r?\n|\r/ig, '');
-            }
-            let excerpt = removeTags(post.data[0].excerpt.rendered);
-
-            let feauredVideo = post.data[0].acf.header_video ? post.data[0].acf.header_video : ''
-            let featuredImage = post.data[0].featured_media ? post.data[0]['_embedded']['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''
-
-            const dark = post.data[0].acf.dark_background ? true : false
-            const pageData = { post: post.data[0], title: title, content: post.data[0].content.rendered, excerpt: excerpt, slug: params.slug, hasContactForm: post.data[0].acf.page_has_contact_form }
-            store.commit('page/SET_FEATURED', { title: title, featuredImage: featuredImage, darkMode: dark, featured_video: feauredVideo })
-
+            const pageData = getPageData({ params, $axios, store, url: "wp/v2/pages?slug=shop&_embed" })
             return {
                 products,
                 pageData

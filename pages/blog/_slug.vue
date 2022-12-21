@@ -7,13 +7,14 @@
 </template>
 
 <script>
+import getPageData from '@/plugins/getPageData.js';
 export default {
     layout: "page",
     head() {
         if (this.$store.state.page.pageFeatures.yoast_head_json) {
             let metaArray = []
             Object.entries(this.$store.state.page.pageFeatures.yoast_head_json).map(ele => {
-                console.log(ele)
+
                 if (ele[0] == 'robots') {
                     let meta = Object.values(ele[1])
                     metaArray.push({
@@ -51,30 +52,7 @@ export default {
         }
     },
     async asyncData({ params, $axios, store }) {
-        store.commit('nav/CLOSE_MENU')
-        const post = await $axios.get(
-            `wp/v2/posts?slug=${params.slug}&_embed`
-        );
-        let title = post.data[0].title.rendered
-            .replace(/–/g, '-')
-            .replace(/“/g, '"')
-            .replace(/”/g, '"')
-            .replace(/’/g, "'");
-
-        function removeTags(str) {
-            if ((str === null) || (str === ''))
-                return false;
-            else
-                str = str.toString();
-            return str.replace(/(<([^>]+)>)/ig, '').replace(/\r?\n|\r/ig, '');
-        }
-        let excerpt = removeTags(post.data[0].excerpt.rendered);
-        let featuredImage = ''
-        featuredImage = post.data[0].featured_media ? post.data[0]['_embedded']['wp:featuredmedia'][0].media_details.sizes.full.source_url : ''
-        const dark = post.data[0].acf.dark_background ? true : false
-        const pageData = { post: post.data[0], title: title, content: post.data[0].content.rendered, excerpt: excerpt, slug: params.slug, hasContactForm: post.data[0].acf.page_has_contact_form }
-        store.commit('page/SET_FEATURED', { title: title, featuredImage: featuredImage, darkMode: dark, yoast_head_json: post.data[0].yoast_head_json })
-        return pageData
+        return getPageData({ params, $axios, store, url: `wp/v2/posts?slug=${params.slug}&_embed` })
     },
 
 }
