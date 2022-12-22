@@ -46,7 +46,7 @@ export default {
   modules: [
     '@nuxtjs/axios'
   ],
-  server: { host: '0' }
+  //server: { host: '0' }
   // default: localhost  }
   // Build Configuration: https://go.nuxtjs.dev/config-build
 }
