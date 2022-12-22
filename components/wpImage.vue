@@ -10,7 +10,7 @@ export default {
 
             const img = Object.keys(this.$store.state.page.pageFeatures.featuredImage.sizes).map(e => this.$store.state.page.pageFeatures.featuredImage.sizes[e])
             const size = Object.keys(img).length - 1
-            return img[size].source_url
+            return img[size]?.source_url
         },
         srcset() {
             let srcsetValues = []

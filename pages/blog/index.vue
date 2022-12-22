@@ -6,6 +6,7 @@
             <nuxt-link :to="'/blog/'+post.slug" class="block p-4 border-b border-gray-300 hover:bg-gray-100">
                 <h2 class="text-xl font-semibold mb-2">{{ post.title.rendered }}</h2>
                 <p v-html="post.excerpt.rendered" class="text-gray-700"></p>
+                <p class="font-bold text-underline">Read more</p>
             </nuxt-link>
         </li>
     </ul>
