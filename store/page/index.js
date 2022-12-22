@@ -14,6 +14,9 @@ export const state = () => ({
   },
 })
 export const mutations = {
+  FORCE_LIGHT: (state) => {
+    state.pageFeatures.darkMode = false
+  },
   FORCE_DARK: (state) => {
     state.pageFeatures.darkMode = true
   },

@@ -33,7 +33,12 @@
 export default {
     name: 'page',
     created() {
-        this.$store.state.nav.menuOpen = false
+        this.$store.commit('nav/CLOSE_MENU')
+        if (process.client) {
+            const bodyClass = document.querySelector('body').classList
+            bodyClass.remove('overflow-hidden')
+            console.log('body', bodyClass)
+        }
     },
 
     methods: {

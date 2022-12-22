@@ -1,18 +1,13 @@
 const baseHref = process.env.BASE_URL || '/';
-
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
-
   head: {
     title: 'Margin',
     htmlAttrs: {
       lang: 'en'
     },
-    // script: [
-    //   { src: 'https://js.stripe.com/v3' },
-    // ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -53,5 +48,4 @@ export default {
   ],
   // Build Configuration: https://go.nuxtjs.dev/config-build
 
- 
 }

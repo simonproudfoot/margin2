@@ -21,6 +21,14 @@ export default {
             }
         }
     },
+    created() {
+        this.$store.commit('nav/CLOSE_MENU')
+        if (process.client) {
+            const bodyClass = document.querySelector('body').classList
+            bodyClass.remove('overflow-hidden')
+            console.log('body', bodyClass)
+        }
+    },
     async asyncData({ params, $axios, store }) {
         return getPageData({ params, $axios, store, url: `wp/v2/pages?slug=${params.slug}&_embed` })
     },
