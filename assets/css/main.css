@@ -10,9 +10,12 @@
 
 html, body {
     @apply text-gray-900 font-body
+
 }
 
-
+body {
+  touch-action: pan-y;
+}
 
 p, ol, ul, blockquote, pre, code {
     line-height: 18px;
@@ -21,8 +24,6 @@ p, ol, ul, blockquote, pre, code {
     margin-bottom: 1.5em;
     
 }
-
-
 
 .navWhite .nuxt-link-exact-active {
     border-bottom: 1px #fff solid;
