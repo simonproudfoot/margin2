@@ -76,7 +76,7 @@ export default {
     async asyncData({ params, $axios, store }) {
         try {
             const response = await $axios.get(
-                `https://remarkable-arithmetic-20e4c5.netlify.app/.netlify/functions/wooProducts`
+                `${process.env.netlifyFunctionsUrl}/wooProducts`
             );
             const products = await response.data;
             return {
