@@ -2,6 +2,7 @@ export const state = () => ({
   cartUIStatus: "idle",
   cart: {},
   clientSecret: "",
+  userDetails: {}
 });
 export const mutations = {
   UPDATE_CART_UI: (state, payload) => {
@@ -28,7 +29,7 @@ export const actions = {
       const result = await this.$axios.$post(
         `${process.env.netlifyFunctionsUrl}/create-payment-intent`,
         {
-          currency: "eur",
+          currency: "gbp",
           amount,
           itemName,
         },

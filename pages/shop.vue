@@ -3,9 +3,7 @@
     <div v-for="item in products" :key="item.id" class="flex flex-col md:flex-row justify-between items-center">
         <div class="w-full md:w-2/3 p-4 order-2 md:order-1">
             <h2 class="text-4xl font-bold mb-2" v-html="item.name"></h2>
-            <p class="text-xl mb-0 font-bold" v-if="!item.on_sale">
-                £{{ item.price }}
-            </p>
+            <p class="text-xl mb-0 font-bold" v-if="!item.on_sale">£{{ item.price }}</p>
             <p v-else class="text-red mb-0">SALE £{{ item.sale_price }}</p>
             <p>Shipping included</p>
             <p class="text-gray-700 leading-relaxed mb-4" v-html="item.description"></p>
@@ -47,7 +45,7 @@ export default {
         return {
             products: [],
             showImg: 0,
-            quantity: 0,
+            quantity: 1,
         };
     },
     mounted() {
@@ -80,8 +78,7 @@ export default {
             );
             const products = await response.data;
             return {
-                products,
-                // pageData
+                products
             };
         } catch (error) {
             console.log(error);
