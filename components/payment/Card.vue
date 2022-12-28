@@ -124,7 +124,7 @@ export default {
         }),
         markPaid() {
             this.organiseVals()
-            this.$axios.post(`${process.env.NETFLIFY_FUNCTION_URL}/createOrder`, this.user)
+            this.$axios.post(`${process.env.netlifyFunctionsUrl}/createOrder`, this.user)
             this.updateCartUI("success");
         },
         organiseVals() {
