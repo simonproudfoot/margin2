@@ -2,22 +2,19 @@ const axios = require('axios');
 const https = require('https');
 
 exports.handler = async (event, context) => {
-  const data = JSON.parse(event.body);
-
-  console.log(data)
-  // Extract the query string parameters
-  const params = event.queryStringParameters;
   // Extract the consumer key and consumer secret
   const consumerKey = process.env.WOO_USER
   const consumerSecret = process.env.WOO_SECRET;
   // Extract the store URL
   const storeUrl = process.env.BASE_URL
+  const data = JSON.parse(event.body);
+console.log(data)
   try {
     // Use axios to make a request to the WooCommerce API
     const response = await axios({
-      data: '',
-      method: 'POST',
-      url: `${storeUrl}/wp-json/wc/v3/order`,
+      method: 'post',
+      url: `${storeUrl}/wp-json/wc/v2/orders`,
+      data:data,
       auth: {
         username: consumerKey,
         password: consumerSecret
@@ -26,6 +23,7 @@ exports.handler = async (event, context) => {
         rejectUnauthorized: false
       })
     });
+
     // Return the response as a JSON object
     return {
       statusCode: 200,

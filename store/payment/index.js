@@ -1,50 +1,51 @@
 export const state = () => ({
-  cartUIStatus: "idle",
-  cart: {},
-  clientSecret: "",
-  userDetails: {}
+  cart: [],
+  sessionData: {},
 });
 export const mutations = {
-  UPDATE_CART_UI: (state, payload) => {
-    state.cartUIStatus = payload;
-  },
+  SET_STRIPE_SESSION_DATA: (state, payload) => (state.sessionData = payload),
   CLEAR_CART: (state) => {
-    state.cart = {};
-    state.cartUIStatus = "idle";
-    state.clientSecret = "";
+    state.cart = [];
   },
   ADD_TO_CART: (state, payload) => {
-    state.cart = payload;
+    state.cart.push(payload);
   },
-  SET_CLIENT_SECRET: (state, payload) => {
-    state.clientSecret = payload;
+  RESET_STRIPE_SESSION: (state) => {
+    state.sessionData = {};
   },
 };
 
 export const actions = {
-  async createPaymentIntent({ commit, state }, quantity) {
-    try {
-      const { name: itemName, price } = state.cart;
-      const amount = Number(price) * 100 * quantity;
-      const result = await this.$axios.$post(
-        `${process.env.netlifyFunctionsUrl}/create-payment-intent`,
-        {
-          currency: "gbp",
-          amount,
-          itemName,
+  async createStripeSession({ commit }, data) {
+    const { session } = await this.$axios.$post(
+      `${process.env.netlifyFunctionsUrl}/create-checkout-session`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (result.clientSecret) {
-        commit("SET_CLIENT_SECRET", result.clientSecret);
       }
-    } catch (e) {
-      console.log("error", e);
+    );
+    if (session.id) {
+      commit("SET_STRIPE_SESSION_DATA", session);
     }
+    return session;
+  },
+  async retriveStripeSession({ state, commit }) {
+    const { session } = await this.$axios.$post(
+      `${process.env.netlifyFunctionsUrl}/retrive-checkout-session`,
+      {
+        sessionId: state.sessionData.id,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (session.id) {
+      commit("SET_STRIPE_SESSION_DATA", session);
+    }
+    return session;
   },
 };
