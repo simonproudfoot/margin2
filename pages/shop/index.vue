@@ -50,6 +50,8 @@ export default {
             showImg: 0,
             quantity: 1,
             loading: false,
+            products: []
+
         };
     },
     computed: {
@@ -102,18 +104,11 @@ export default {
             }
         },
     },
-
-    async asyncData({ $axios }) {
+    async fetch() {
         try {
-            const response = await $axios.get(
-                `${process.env.netlifyFunctionsUrl}/wooProducts`
-            );
-            const products = await response.data;
-            return {
-                products,
-            };
+            this.products = await this.$axios.$get(`${process.env.netlifyFunctionsUrl}/wooProducts`)
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     },
 };
