@@ -41,7 +41,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "~/plugins/data.server.js",
-    '~/plugins/persistedState.client.js'
+    '~/plugins/persistedState.client.js',
+    { src: '~/plugins/vue-stripe.js', ssr: false }
     //{ src: '~/plugins/stripe.js', mode: 'client' }
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
