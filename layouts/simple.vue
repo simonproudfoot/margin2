@@ -4,8 +4,7 @@
     <TopNav :frontpage="false" />
     <div class="min-h-screen md:flex">
         <sideNav />
-
-        <Nuxt v-if="!$store.state.page.pageFeatures.featured_video" />
+        <Nuxt />
     </div>
     <footerNav />
 </div>
@@ -22,11 +21,6 @@ export default {
             console.log('body', bodyClass)
         }
     },
-    methods: {
-        scrollToContent() {
-            const selected = document.getElementById('scrollTo')
-            selected.scrollIntoView({ behavior: "smooth", inline: "nearest" });
-        }
-    },
+   
 }
 </script>
