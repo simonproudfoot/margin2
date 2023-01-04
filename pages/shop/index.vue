@@ -75,7 +75,7 @@ export default {
                 const myDomain = window.location;
                 const data = {
                     success_url: `${myDomain}/payment-success`,
-                    cancel_url: `${myDomain}/shop`,
+                    cancel_url: `${myDomain}`,
                     line_items: [{
                         price_data: {
                             currency: "gbp",
