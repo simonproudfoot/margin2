@@ -52,26 +52,48 @@ export default {
         postal_code: postcode,
       } = session.customer_details.address;
 
-      const billingAndShippingData = {
+      const {
+        line1: shippingLine1,
+        line2: shippingLine2,
+        city: shippingCity,
+        country: shippingCountry,
+        state: shippingState,
+        postal_code: shippingPostcode,
+      } = session.shipping_details.address;
+
+      const billing = {
         first_name,
         last_name,
-        address_1:line1||"",
-        address_2:line2||"",
+        address_1: line1 || "",
+        address_2: line2 || "",
         city,
         state: state || "",
         postcode,
         country,
+        email,
+        phone: phone || "",
+      };
+      const shipping = {
+        first_name,
+        last_name,
+        address_1: shippingLine1 || line1 || "",
+        address_2: shippingLine2 || line2 || "",
+        city: shippingCity || city || "",
+        state: shippingState || state || "",
+        postcode: shippingPostcode || postcode || "",
+        country: shippingCountry || country || "",
       };
 
       const data = {
         payment_method,
         payment_method_title: `${name} paid via ${payment_method}`,
         set_paid: true,
-        billing: { ...billingAndShippingData, email, phone: phone || "" },
-        shipping: billingAndShippingData,
+        billing,
+        shipping,
         line_items,
         shipping_lines: [],
       };
+      debugger;
       let order = JSON.parse(JSON.stringify(data));
       await this.$axios.$post(
         `${process.env.netlifyFunctionsUrl}/createOrder`,
