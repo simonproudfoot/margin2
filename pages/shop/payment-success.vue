@@ -93,6 +93,7 @@ export default {
             };
             debugger;
             let order = JSON.parse(JSON.stringify(data));
+            console.log(order)
             try {
                 await this.$axios.$post(
                     `${process.env.netlifyFunctionsUrl}/createOrder`,
