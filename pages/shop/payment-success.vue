@@ -26,6 +26,7 @@ export default {
             resetSession: "payment/RESET_STRIPE_SESSION",
         }),
         async retriveStripeSession() {
+            console.log('running retriveStripeSession')
             const session = await this.$store.dispatch(
                 "payment/retriveStripeSession"
             );
@@ -33,6 +34,7 @@ export default {
             await this.createOrder();
         },
         async createOrder() {
+        
             const session = { ...this.session };
             const payment_method = session.payment_method_types[0];
             const { name, email, phone } = session.customer_details;
@@ -92,6 +94,7 @@ export default {
             };
             debugger;
             let order = JSON.parse(JSON.stringify(data));
+            console.log('running createOrder')
             await this.$axios.$post(
                 `${process.env.netlifyFunctionsUrl}/createOrder`,
                 order, {
