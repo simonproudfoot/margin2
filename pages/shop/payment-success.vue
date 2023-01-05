@@ -1,13 +1,12 @@
 <template>
-<client-only>
-    <main id="scrollTo" class="md:w-9/12 px-12 pb-24 contentArea z-10 bg-white max-w-[800px] pt-4 mt-1">
-        <div class="text-lg text-green-600">Order Successfull</div>
-    </main>
-</client-only>
+<main id="scrollTo" class="md:w-9/12 px-12 pb-24 contentArea z-10 bg-white max-w-[800px] pt-4 mt-1">
+    <div class="text-lg text-green-600">Order Successfull</div>
+</main>
 </template>
 
 <script>
 import { mapMutations, mapState } from "vuex";
+
 export default {
     layout: "simple",
     data() {
@@ -18,7 +17,7 @@ export default {
     computed: {
         ...mapState("payment", ["cart"]),
     },
-    mounted() {
+    created() {
         this.retriveStripeSession();
     },
     methods: {
@@ -93,22 +92,16 @@ export default {
             };
             debugger;
             let order = JSON.parse(JSON.stringify(data));
-            console.log(order)
-            try {
-                await this.$axios.$post(
-                    `${process.env.netlifyFunctionsUrl}/createOrder`,
-                    order, {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
-                this.clearCart();
-                this.resetSession();
-            } catch (error) {
-                console.log(error)
-            }
-
+            await this.$axios.$post(
+                `${process.env.netlifyFunctionsUrl}/createOrder`,
+                order, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            this.clearCart();
+            this.resetSession();
         },
     },
 };
