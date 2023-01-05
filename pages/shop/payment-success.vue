@@ -8,7 +8,6 @@
 
 <script>
 import { mapMutations, mapState } from "vuex";
-
 export default {
     layout: "simple",
     data() {
@@ -94,16 +93,21 @@ export default {
             };
             debugger;
             let order = JSON.parse(JSON.stringify(data));
-            await this.$axios.$post(
-                `${process.env.netlifyFunctionsUrl}/createOrder`,
-                order, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            this.clearCart();
-            this.resetSession();
+            try {
+                await this.$axios.$post(
+                    `${process.env.netlifyFunctionsUrl}/createOrder`,
+                    order, {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                this.clearCart();
+                this.resetSession();
+            } catch (error) {
+                console.log(error)
+            }
+
         },
     },
 };
