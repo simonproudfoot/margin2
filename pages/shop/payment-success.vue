@@ -19,7 +19,7 @@ export default {
     computed: {
         ...mapState("payment", ["cart"]),
     },
-    created() {
+    mounted() {
         this.retriveStripeSession();
     },
     methods: {
