@@ -1,5 +1,5 @@
 <template>
-<nav class="absolute md:fixed  w-full md:w-3/12 md:relative md:h-auto z-40 h-fit">
+<nav v-cloak class="absolute md:fixed  w-full md:w-3/12 md:relative md:h-auto z-40 h-fit">
     <div class="navMenu fixed md:relative top-0 w-full bg-black  md:bg-transparent h-full flex md:block items-center md:items-start" v-show="showMenu">
         <div class="mx-auto">
             <ul class="sticky top-0 px-12 pb-4 pt-14 md:pt-4 mt-1" :class="$store.state.page.pageFeatures.darkMode ? 'navWhite' : 'navBlack'">
