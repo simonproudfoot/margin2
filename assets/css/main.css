@@ -164,6 +164,11 @@ p {
 }
 
 
+.wp-block-separator{
+  height: 50px;
+}
+
+
 /* 
 .page-enter-active {
     transition: all 0.4s;
