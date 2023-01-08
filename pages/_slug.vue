@@ -1,5 +1,5 @@
 <template>
-<main id="scrollTo" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="$store.state.page.pageFeatures.featuredImage == null ? 'pt-4 mt-1' : 'contentMargin'">
+<main id="scrollTo" :style="`margin-top:${marginTop}`" class="md:w-9/12  px-12 pb-24 contentArea z-10 bg-white max-w-[800px]" :class="$store.state.page.pageFeatures.featuredImage == null ? 'pt-4 mt-1' : ''">
     <h1 v-if="$store.state.page.pageFeatures.featuredImage == null" ref="header" class="pb-12 text-4xl font-bold" v-html="title"></h1>
     <div class="page-content" v-html="content"></div>
     <videoList v-if="$store.state.page.pageFeatures.featured_video" />
@@ -21,6 +21,15 @@ export default {
             }
         }
     },
+    computed: {
+        marginTop() {
+            if (process.client) {
+                const nav = document.getElementById('topNav')
+                const h = nav.clientHeight + 'px'
+                return this.$store.state.page.pageFeatures.featuredImage ? `calc(100vh - ${h})` : '0'
+            }
+        }
+    },
     created() {
         this.$store.commit('nav/CLOSE_MENU')
         if (process.client) {
@@ -35,15 +44,3 @@ export default {
 
 }
 </script>
-
-<style>
-.contentMargin {
-    margin-top: 100vh;
-}
-
-@media (min-width: 768px) {
-    .contentMargin {
-        margin-top: 80vh;
-    }
-}
-</style>
