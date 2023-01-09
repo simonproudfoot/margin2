@@ -27,6 +27,8 @@ export default {
                 const nav = document.getElementById('topNav')
                 const h = nav.clientHeight + 'px'
                 return this.$store.state.page.pageFeatures.featuredImage ? `calc(100vh - ${h})` : '0'
+            }else{
+                return 0
             }
         }
     },
