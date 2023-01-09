@@ -23,27 +23,28 @@ export default {
     },
     computed: {
         marginTop() {
-            if (process.client) {s
-                const nav = document.getElementById('topNav')
-                if (nav) {
-                    const h = nav.clientHeight + 'px'
-                    return this.$store.state.page.pageFeatures.featuredImage ? `calc(100vh - ${h})` : '0' {}
-                } else {
-                    return 0
-                }
-            }
-        },
-        created() {
-            this.$store.commit('nav/CLOSE_MENU')
             if (process.client) {
-                const bodyClass = document.querySelector('body').classList
-                bodyClass.remove('overflow-hidden')
-                console.log('body', bodyClass)
+                const nav = document.getElementById('topNav')
+                if(nav){
+                const h = nav.clientHeight + 'px'
+                return this.$store.state.page.pageFeatures.featuredImage ? `calc(100vh - ${h})` : '0'
+                {}
+            }else{
+                return 0
             }
-        },
-        async asyncData({ params, $axios, store }) {
-            return getPageData({ params, $axios, store, url: `wp/v2/pages?slug=${params.slug}&_embed` })
-        },
+        }
+    },
+    created() {
+        this.$store.commit('nav/CLOSE_MENU')
+        if (process.client) {
+            const bodyClass = document.querySelector('body').classList
+            bodyClass.remove('overflow-hidden')
+            console.log('body', bodyClass)
+        }
+    },
+    async asyncData({ params, $axios, store }) {
+        return getPageData({ params, $axios, store, url: `wp/v2/pages?slug=${params.slug}&_embed` })
+    },
 
-    }
+}
 </script>
