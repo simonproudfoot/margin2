@@ -15,7 +15,7 @@ export default {
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    //script: [{ src: "https://js.stripe.com/v3/" }],
+
   },
   axios: {
     baseURL: baseHref + "/wp-json/", // Used as fallback if no runtime config is provided
