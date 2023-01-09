@@ -16,6 +16,8 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
 
+
+
   },
   axios: {
     baseURL: baseHref + "/wp-json/", // Used as fallback if no runtime config is provided
@@ -43,7 +45,7 @@ export default {
     "~/plugins/data.server.js",
     '~/plugins/persistedState.client.js',
     { src: '~/plugins/vue-stripe.js', ssr: false }
-    //{ src: '~/plugins/stripe.js', mode: 'client' }
+
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,7 +53,5 @@ export default {
   buildModules: ["@nuxtjs/tailwindcss", "nuxt-gsap-module"],
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/axios"],
-  //server: { host: '0' }
-  // default: localhost  }
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+
 };
