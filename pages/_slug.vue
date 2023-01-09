@@ -25,11 +25,11 @@ export default {
         marginTop() {
             if (process.client) {
                 const nav = document.getElementById('topNav')
-                if(nav){
-                const h = nav.clientHeight + 'px'
-                return this.$store.state.page.pageFeatures.featuredImage ? `calc(100vh - ${h})` : '0'
-                {}
-            }else{
+                if (nav) {
+                    const h = nav.clientHeight + 'px'
+                    return this.$store.state.page.pageFeatures.featuredImage ? `calc(100vh - ${h})` : '0'
+                }
+            } else {
                 return 0
             }
         }
