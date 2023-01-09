@@ -30,7 +30,7 @@ export default {
                     return this.$store.state.page.pageFeatures.featuredImage ? `calc(100vh - ${h})` : '0'
                 }
             } else {
-                return 0
+                return '0px'
             }
         }
     },
