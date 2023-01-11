@@ -44,6 +44,7 @@ export default {
             const first_name = namesList[0];
             const last_name = namesList[1];
             const line_items = this.cart;
+            debugger
             const {
                 line1,
                 line2,
@@ -60,7 +61,7 @@ export default {
                 country: shippingCountry,
                 state: shippingState,
                 postal_code: shippingPostcode,
-            } = session.shipping.address;
+            } = session.shipping_details.address;
 
             const billing = {
                 first_name,
